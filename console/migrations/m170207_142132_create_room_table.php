@@ -35,7 +35,13 @@ class m170207_142132_create_room_table extends Migration {
             'description' => $this->text()->notNull(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
+            'user_id' => $this->integer(),
         ]);
+
+        $this->createIndex('FK_room_owner', '{{%room}}', 'user_id');
+        $this->addForeignKey(
+                'FK_room_owner', '{{%room}}', 'user_id', '{{%user}}', 'id', 'SET NULL', 'CASCADE'
+        );
     }
 
     /**
