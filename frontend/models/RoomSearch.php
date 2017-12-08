@@ -17,7 +17,7 @@ class RoomSearch extends Room
      */
 	 
 	 public $min_price;
-     public $max_price;
+         public $max_price;
 	 public $min_room;
 	 public $max_room;
 	 public $min_floor;
@@ -94,7 +94,7 @@ class RoomSearch extends Room
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'city', $this->city])
             ->andFilterWhere(['>', 'price', $this->min_price])
-			->andFilterWhere(['<', 'price', $this->max_price])
+	    ->andFilterWhere(['<', 'price', $this->max_price])
             ->andFilterWhere(['like', 'street', $this->street])
             ->andFilterWhere(['like', 'house', $this->house])
             ->andFilterWhere(['like', 'square', $this->square])

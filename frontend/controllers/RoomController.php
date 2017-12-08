@@ -30,6 +30,15 @@ class RoomController extends Controller {
         ];
     }
 
+    public function actions() {
+        return [
+            
+            'pages' => [
+                'class' => 'yii\web\ViewAction',
+            ],
+        ];
+    }
+
     /**
      * Lists all Room models.
      * @return mixed
@@ -44,7 +53,6 @@ class RoomController extends Controller {
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,
                     'top_apartments' => $top_apartments,
-
         ]);
     }
 
@@ -72,19 +80,16 @@ class RoomController extends Controller {
             $model->imageFile = UploadedFile::getInstances($model, 'imageFile');
 
             if ($model->validate()) {
-                $filePaths=[];
+                $filePaths = [];
                 foreach ($model->imageFile as $file) {
                     $filePath = 'uploads/' . $file->baseName . '.' . $file->extension;
                     $filePaths[] = $filePath;
                     $file->saveAs($filePath);
                 }
-                $model->imageFile=implode(",", $filePaths);
-                if ($model->save(false)) return $this->redirect(['view', 'id' => $model->id]);
+                $model->imageFile = implode(",", $filePaths);
+                if ($model->save(false))
+                    return $this->redirect(['view', 'id' => $model->id]);
             }
-
-
-
-
         } else {
             return $this->render('create', [
                         'model' => $model,
@@ -101,23 +106,20 @@ class RoomController extends Controller {
     public function actionUpdate($id) {
         $model = $this->findModel($id);
 
-    if ($model->load(Yii::$app->request->post())) {
+        if ($model->load(Yii::$app->request->post())) {
             $model->imageFile = UploadedFile::getInstances($model, 'imageFile');
 
             if ($model->validate()) {
-                $filePaths=[];
+                $filePaths = [];
                 foreach ($model->imageFile as $file) {
                     $filePath = 'uploads/' . $file->baseName . '.' . $file->extension;
                     $filePaths[] = $filePath;
                     $file->saveAs($filePath);
                 }
-                $model->imageFile=implode(",", $filePaths);
-                if ($model->save(false)) return $this->redirect(['view', 'id' => $model->id]);
+                $model->imageFile = implode(",", $filePaths);
+                if ($model->save(false))
+                    return $this->redirect(['view', 'id' => $model->id]);
             }
-
-
-
-
         } else {
             return $this->render('update', [
                         'model' => $model,
@@ -125,7 +127,7 @@ class RoomController extends Controller {
         }
 
 
-      
+
 
 
 
@@ -136,8 +138,6 @@ class RoomController extends Controller {
         //                 'model' => $model,
         //     ]);
         // }
-
-
     }
 
     /**

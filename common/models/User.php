@@ -22,37 +22,34 @@ use Yii;
  * @property Reservation[] $reservations
  * @property Room[] $rooms
  */
-class User extends \yii\db\ActiveRecord
-{
+class User extends \yii\db\ActiveRecord {
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'user';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at'], 'required'],
-            [['status', 'created_at', 'updated_at'], 'integer'],
-            [['username', 'password_hash', 'password_reset_token', 'email', 'first_name', 'phone'], 'string', 'max' => 255],
-            [['auth_key'], 'string', 'max' => 32],
-            [['username'], 'unique'],
-            [['email'], 'unique'],
-            [['password_reset_token'], 'unique'],
+                [['username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at'], 'required'],
+                [['status', 'created_at', 'updated_at'], 'integer'],
+                [['username', 'password_hash', 'password_reset_token', 'email', 'first_name', 'phone'], 'string', 'max' => 255],
+                [['auth_key'], 'string', 'max' => 32],
+                [['username'], 'unique'],
+                [['email'], 'unique'],
+                [['password_reset_token'], 'unique'],
         ];
     }
 
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'username' => 'Username',
@@ -71,16 +68,19 @@ class User extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getReservations()
-    {
+    public function getReservations() {
         return $this->hasMany(Reservation::className(), ['user_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getRooms()
-    {
+    public function getRooms() {
         return $this->hasMany(Room::className(), ['user_id' => 'id']);
     }
+
+    const ROLE_USER = 1;
+    const ROLE_OWNER = 5;
+    const ROLE_ADMIN = 10;
+
 }

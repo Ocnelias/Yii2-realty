@@ -151,4 +151,5 @@ public $rooms_number_to = ['prompt' => 'rooms number to'];
 public $floor_number_from = ['prompt' => 'floor number from'];
 public $floor_number_to = ['prompt' => 'floor number to'];
 public $params_city = ['prompt' => 'city']; 
+public $params_range = ['placeholder' => 'city']; 
 }
